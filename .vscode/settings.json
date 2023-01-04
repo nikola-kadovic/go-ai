@@ -1,0 +1,14 @@
+{
+  "cSpell.words": [
+    "ABCDEFGHIJKLMNOPQRST",
+    "dlgo",
+    "goboard",
+    "gotypes",
+    "zobrist"
+  ],
+  "python.testing.pytestArgs": [
+    "test"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
+}

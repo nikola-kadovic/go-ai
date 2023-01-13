@@ -239,23 +239,21 @@ class TestGameState:
         """
         Final board position:
 
-        - - - - - - -
-        |   A B C D E 
-        | 1   o
-        | 2 o x o
-        | 3 x   x
-        | 4   x
-        | 5
+        5  .  .  .  .  . 
+        4  .  o  .  .  . 
+        3  o  .  o  .  . 
+        2  x  o  x  .  . 
+        1  .  x  .  .  . 
+            A  B  C  D  E
 
         The previous board position is the following:
 
-        - - - - - - -
-        |   A B C D E 
-        | 1   o
-        | 2 o   o
-        | 3 x o x
-        | 4   x
-        | 5
+        5  .  .  .  .  . 
+        4  .  o  .  .  . 
+        3  o  x  o  .  . 
+        2  x  .  x  .  . 
+        1  .  x  .  .  . 
+            A  B  C  D  E
 
         Thus, if black plays Point(3, 2), it should violate ko by bringing the board back to a previous position
         """
@@ -310,10 +308,8 @@ class TestGameState:
         assert not game_state_play.is_valid_move(Move.play(Point(1, 1)))
 
     def test_cannot_self_capture(self, game_state_self_capture):
-
         assert not game_state_self_capture.is_valid_move(
             Move.play(Point(2, 1)))
 
     def test_cannot_violate_ko(self, game_state_ko):
-
         assert not game_state_ko.is_valid_move(Move.play(Point(3, 2)))

@@ -215,7 +215,7 @@ class GameState:
     def situation(self) -> tuple[Player, Board]:
         return self.next_player, self.board
 
-    def does_not_violate_ko(self, player: Player, move: Move) -> bool:
+    def violates_ko(self, player: Player, move: Move) -> bool:
         if not move.is_play:
             return False
         next_board = copy.deepcopy(self.board)
@@ -233,5 +233,5 @@ class GameState:
         return (
             self.board.get_go_string(move.point) is None and
             not self.is_move_self_capture(self.next_player, move) and
-            not self.does_not_violate_ko(self.next_player, move)
+            not self.violates_ko(self.next_player, move)
         )

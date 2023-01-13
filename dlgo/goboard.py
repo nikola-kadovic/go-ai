@@ -159,7 +159,8 @@ class GameState:
 
         # A set of hashes of all historical GameStates
         if previous_state is None:
-            self.previous_states: frozenset[tuple[Player, zobrist.Hash]] = frozenset()
+            self.previous_states: frozenset[tuple[Player, zobrist.Hash]] = frozenset(
+            )
         else:
             self.previous_states: frozenset[tuple[Player, zobrist.Hash]] = previous_state.previous_states | \
                 {(previous_state.next_player, previous_state.board.zobrist_hash())}
@@ -175,6 +176,15 @@ class GameState:
         else:
             next_board = self.board
         return GameState(next_board, self.next_player.other, self, move)
+
+    @staticmethod
+    def apply_sequence(init_state: GameState, moves: Iterable[Point]) -> GameState:
+        # utility function used mostly for testing purposes
+
+        game_state = init_state
+        for move in moves:
+            game_state = game_state.apply_move(move)
+        return game_state
 
     def is_over(self) -> bool:
         if self.last_move is None:
@@ -194,7 +204,7 @@ class GameState:
             return False
         future_board = copy.deepcopy(self.board)
         future_board.place_stone(player, move.point)
-        return future_board.get_go_string(move.point).liberties == 0
+        return len(future_board.get_go_string(move.point).liberties) == 0
 
     """
     Ko: A situation that arises when a player plays a move where the resulting GameState is identical to another

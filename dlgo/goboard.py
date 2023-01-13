@@ -105,6 +105,8 @@ class Board:
             replacement_string = other_color_string.without_liberty(point)
 
             if replacement_string.num_liberties == 0:
+                for point in replacement_string.stones:
+                    self._hash ^= zobrist.HASH_CODE[point, player.other]
                 self._remove_string(other_color_string)
             else:
                 self._replace_string(replacement_string)

@@ -105,8 +105,6 @@ class Board:
             replacement_string = other_color_string.without_liberty(point)
 
             if replacement_string.num_liberties == 0:
-                for point in replacement_string.stones:
-                    self._hash ^= zobrist.HASH_CODE[point, player.other]
                 self._remove_string(other_color_string)
             else:
                 self._replace_string(replacement_string)
@@ -145,6 +143,7 @@ class Board:
                 if neighbor_string is not string:
                     self._replace_string(neighbor_string.with_liberty(point))
             self._grid[point] = None
+            self._hash ^= zobrist.HASH_CODE[point, string.color]
 
     def zobrist_hash(self) -> zobrist.Hash:
         return self._hash

@@ -31,3 +31,9 @@ def print_board(board: goboard.Board):
             line.append(STONE_TO_CHAR[stone])
         print(f"{bump}{row} {''.join(line)}")
     print(f"    {'  '.join(COLS[:board.num_cols])}")
+
+
+def point_from_coords(coords):
+    col = COLS.index(coords[0]) + 1
+    row = int(coords[1:])
+    return gotypes.Point(row=row, col=col)

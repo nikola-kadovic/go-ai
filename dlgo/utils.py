@@ -18,7 +18,7 @@ def print_move(player: gotypes.Player, move: goboard.Move):
     elif move.is_resign:
         move_str = f"player {str(player)} resigns"
     else:
-        move_str = f"{str(player)} {COLS[move.point.cols - 1]} {move.point.row}"
+        move_str = f"{str(player)} {COLS[move.point.col - 1]} {move.point.row}"
     print(move_str)
 
 

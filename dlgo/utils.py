@@ -18,7 +18,7 @@ def print_move(player: gotypes.Player, move: goboard.Move):
     elif move.is_resign:
         move_str = f"player {str(player)} resigns"
     else:
-        move_str = f"{str(player)} {COLS[move.point.cols - 1]} {move.point.row}"
+        move_str = f"{str(player)} {COLS[move.point.col - 1]} {move.point.row}"
     print(move_str)
 
 
@@ -31,3 +31,9 @@ def print_board(board: goboard.Board):
             line.append(STONE_TO_CHAR[stone])
         print(f"{bump}{row} {''.join(line)}")
     print(f"    {'  '.join(COLS[:board.num_cols])}")
+
+
+def point_from_coords(coords):
+    col = COLS.index(coords[0]) + 1
+    row = int(coords[1:])
+    return gotypes.Point(row=row, col=col)
